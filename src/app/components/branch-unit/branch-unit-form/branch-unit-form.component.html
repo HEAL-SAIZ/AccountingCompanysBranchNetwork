@@ -1,0 +1,74 @@
+<div class="card">
+
+  <div class="p-fluid form__container">
+    <h2>{{ branchUnitId ? 'Редактировать филиал' : 'Добавить филиал' }}</h2>
+
+    <form [formGroup]="branchUnitForm">
+
+      <div class="p-field">
+        <p-floatLabel>
+          <p-dropdown [options]="(organization$ | async) || []"
+                      optionLabel="name"
+                      optionValue="id"
+                      [formControl]="organizationIdControl"
+                      placeholder="Выберите головную организацию"
+                      inputId="float-label">
+          </p-dropdown>
+          <label for="float-label">Выберите организацию</label>
+        </p-floatLabel>
+        <small *ngIf="branchUnitForm.get('organizationId')?.invalid && branchUnitForm.get('organizationId')?.touched">
+          Выбор организации обязателен.
+        </small>
+      </div>
+
+      <div class="p-field">
+        <p-floatLabel>
+          <input id="official"
+                 pInputText
+                 formControlName="official" />
+          <label for="official">Учредитель (ФИО)</label>
+        </p-floatLabel>
+        <small *ngIf="branchUnitForm.get('official')?.invalid && branchUnitForm.get('official')?.touched">
+          Полное наименование обязательно.
+        </small>
+      </div>
+
+      <div class="p-field">
+        <p-floatLabel>
+          <input id="address"
+                 pInputText
+                 formControlName="address" />
+          <label for="address">Адрес</label>
+        </p-floatLabel>
+        <small *ngIf="branchUnitForm.get('address')?.invalid && branchUnitForm.get('address')?.touched">
+          Адрес обязателен.
+        </small>
+      </div>
+
+      <div class="p-field">
+        <p-floatLabel>
+          <p-inputMask id="phone"
+                       mask="+7 999 999 9999"
+                       formControlName="phone" />
+          <label for="phone">Телефон</label>
+        </p-floatLabel>
+        <small *ngIf="branchUnitForm.get('phone')?.invalid && branchUnitForm.get('phone')?.touched">
+          Введите корректный телефонный номер.
+        </small>
+      </div>
+
+      <div class="form-buttons">
+        <button pButton
+                [disabled]="!this.branchUnitForm.valid"
+                type="button"
+                label="Сохранить"
+                (click)="onSave()"></button>
+        <button pButton
+                type="button"
+                label="Назад"
+                class="p-button-secondary"
+                (click)="onClose()"></button>
+      </div>
+    </form>
+  </div>
+</div>

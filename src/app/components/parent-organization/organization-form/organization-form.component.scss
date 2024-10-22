@@ -1,0 +1,42 @@
+h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+small {
+  color: red;
+}
+
+.card {
+  padding: 1rem 20rem;
+
+}
+
+.form__container {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+}
+
+.inn-kpp-fields {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    width: 45%;
+  }
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    width: 45%;
+  }
+}

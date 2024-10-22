@@ -1,0 +1,73 @@
+<div class="card">
+
+  <div class="add-button__container">
+    @if ((userRole$ | async) === roles.ADMIN ) {
+    <p-button label="Добавить филиал"
+              (click)="onCreateBranchUnit()" />
+    <p-button label="Добавить организацию"
+              (click)="onCreateOrganization()" />
+    }
+  </div>
+
+  <p-treeTable [value]="(organizationsTree$ | async) || []"
+               [tableStyle]="{'min-width':'50rem'}"
+               styleClass="p-treetable-sm p-treetable-striped p-treetable-gridlines">
+
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <div class="text-xl font-bold">
+          Дерево организаций
+        </div>
+        <p-button label="Посмотреть списком"
+                  [text]="true"
+                  severity="info"
+                  styleClass="p-button"
+                  (click)="routeToOrganizationList()" />
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="col-name">Название</th>
+        <th class="col-inn">ИНН</th>
+        <th class="col-kpp">КПП</th>
+        <th class="col-founder">Учредитель/должностное лицо</th>
+        <th class="col-address">Адрес</th>
+        <th class="col-phone">Телефон</th>
+        @if ((userRole$ | async) === roles.ADMIN ) {
+        <th class="col-actions"></th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body"
+                 let-rowNode
+                 let-rowData="rowData">
+      <tr class="organization-row"
+          [ttRow]="rowNode">
+        <td class="col-name">
+          <p-treeTableToggler [rowNode]="rowNode" />
+          {{ rowData.name ? rowData.name : 'Филиал' }} {{rowData.shortName ? '(' + rowData.shortName + ')': ''}}
+        </td>
+        <td class="col-inn">{{ rowData.inn || '—' }}</td>
+        <td class="col-kpp">{{ rowData.kpp || '—' }}</td>
+        <td class="col-founder">{{ rowData.founder || rowData.official}}</td>
+        <td class="col-address">{{ rowData.address }}</td>
+        <td class="col-phone">{{ rowData.phone }}</td>
+        @if ((userRole$ | async) === roles.ADMIN ) {
+        <td class="col-actions">
+          @if (rowData.name) {
+          <p-button icon="pi pi-pencil"
+                    rounded="true"
+                    (click)="onOpenOrganization(rowData.id)" />
+          }
+          @else {
+          <p-button icon="pi pi-pencil"
+                    rounded="true"
+                    (click)="onOpenBranchUnit(rowData.id)" />
+          }
+        </td>
+        }
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</div>

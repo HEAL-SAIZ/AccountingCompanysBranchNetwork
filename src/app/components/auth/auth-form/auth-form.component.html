@@ -1,0 +1,37 @@
+<div class="login-container">
+
+  <div class="login-form p-fluid">
+
+    <h2 class="title">Авторизация</h2>
+
+    <form [formGroup]="loginForm">
+
+      <div class="p-field">
+        <label for="username">Логин</label>
+        <input type="text"
+               id="username"
+               formControlName="username"
+               placeholder="Введите логин"
+               pInputText />
+      </div>
+
+      <div class="p-field">
+        <label for="password">Пароль</label>
+        <p-password id="password"
+                    formControlName="password"
+                    [toggleMask]="true"
+                    placeholder="Введите пароль" />
+      </div>
+      @if ((status$ | async) === 'error') {
+      <p-message [style]="{'padding': '5px'}"
+                 severity="error"
+                 text="Ошибка авторизации"></p-message>
+      }
+
+      <button pButton
+              (click)="login()"
+              label="Войти"
+              pRipple></button>
+    </form>
+  </div>
+</div>

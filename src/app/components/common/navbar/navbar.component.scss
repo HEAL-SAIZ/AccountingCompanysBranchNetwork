@@ -1,0 +1,23 @@
+h1 {
+  margin: 4px 0;
+  color: #fff;
+}
+
+.navbar {
+  background-color: #007bff;
+  padding: 4px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar-menu i {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}

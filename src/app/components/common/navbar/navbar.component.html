@@ -1,0 +1,17 @@
+<p-sidebar [(visible)]="sidebarVisible"
+           [baseZIndex]="10000"
+           position="right"
+           [style]="{'width': '300px'}">
+  <p-menu [model]="menuItems"
+          [style]="{'width': '100%'}"></p-menu>
+</p-sidebar>
+
+<div class="navbar">
+  <div>
+    <h1>Учет филиальной сети </h1>
+  </div>
+  <div class="navbar-menu">
+    <i class="pi pi-bars"
+       (click)="sidebarVisible = true"></i>
+  </div>
+</div>

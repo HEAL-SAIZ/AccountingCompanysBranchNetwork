@@ -1,0 +1,71 @@
+<div class="card">
+
+  <div class="add-button__container">
+    @if ((userRole$ | async) === roles.ADMIN ) {
+    <p-button label="Добавить филиал"
+              (click)="onCreateBranchUnit()" />
+    <p-button label="Добавить организацию"
+              (click)="onCreateOrganization()" />
+    }
+  </div>
+
+  <p-table [value]="(combinedData$ | async) || []"
+           [tableStyle]="{ 'min-width': '50rem' }"
+           styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <div class="text-xl font-bold">
+          Таблица организаций
+        </div>
+        <p-button label="Посмотреть деревом"
+                  [text]="true"
+                  severity="info"
+                  styleClass="p-button"
+                  (click)="routeToOrganizationTree()" />
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="col-name">Название</th>
+        <th class="col-inn">ИНН</th>
+        <th class="col-kpp">КПП</th>
+        <th class="col-founder">Учредитель/должностное лицо</th>
+        <th class="col-address">Адрес</th>
+        <th class="col-phone">Телефон</th>
+        @if ((userRole$ | async) === roles.ADMIN ) {
+        <th class="col-actions"></th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body"
+                 let-organization>
+      <tr class="organization-row">
+        <td class="col-name">
+          {{organization.name ? organization.name : 'Филиал'}}
+          {{organization.shortName ? '(' + organization.shortName + ')' : ''}}
+        </td>
+        <td class="col-inn">{{ organization.inn || '—' }}</td>
+        <td class="col-kpp">{{ organization.kpp || '—' }}</td>
+        <td class="col-founder">{{ organization.founder || organization.official}}</td>
+        <td class="col-address">{{ organization.address }}</td>
+        <td class="col-phone">{{ organization.phone }}</td>
+        @if ((userRole$ | async) === roles.ADMIN ) {
+        <td class="col-actions">
+          @if (organization.name) {
+          <p-button icon="pi pi-pencil"
+                    rounded="true"
+                    (click)="onOpenOrganization(organization.id)" />
+          }
+          @else {
+          <p-button icon="pi pi-pencil"
+                    rounded="true"
+                    (click)="onOpenBranchUnit(organization.id)" />
+          }
+        </td>
+        }
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.p-treetable-scrollable-header-box {
+  padding: 0 !important
+}
+
+.p-treetable.p-treetable-sm .p-treetable-header {
+  padding: 0.5rem 0.5rem;
+}
+
+.card {
+  background: var(--surface-card);
+  padding: 1rem 2.5rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}

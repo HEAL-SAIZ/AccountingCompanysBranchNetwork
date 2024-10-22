@@ -1,0 +1,103 @@
+<div class="card">
+
+  <div class="p-fluid form__container">
+    <h2>{{ organizationId ? 'Редактировать организацию' : 'Добавить организацию' }}</h2>
+
+    <form [formGroup]="organizationForm">
+      <div class="p-field">
+        <p-floatLabel>
+          <input id="name"
+                 pInputText
+                 formControlName="name" />
+          <label for="name">Полное наименование</label>
+        </p-floatLabel>
+        <small *ngIf="organizationForm.get('name')?.invalid && organizationForm.get('name')?.touched">
+          Полное наименование обязательно.
+        </small>
+      </div>
+
+      <div class="p-field">
+        <p-floatLabel>
+          <input id="shortName"
+                 pInputText
+                 formControlName="shortName" />
+          <label for="shortName">Сокращенное наименование</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="inn-kpp-fields">
+
+        <div class="p-field">
+          <p-floatLabel>
+            <p-inputMask id="inn"
+                         mask="9999999999"
+                         formControlName="inn" />
+
+            <label for="inn">ИНН</label>
+          </p-floatLabel>
+          <small *ngIf="organizationForm.get('inn')?.invalid && organizationForm.get('inn')?.touched">
+            Введите корректный ИНН (10 цифр).
+          </small>
+        </div>
+
+        <div class="p-field">
+          <p-floatLabel>
+            <p-inputMask id="kpp"
+                         mask="999999999"
+                         formControlName="kpp" />
+            <label for="kpp">КПП</label>
+          </p-floatLabel>
+          <small *ngIf="organizationForm.get('kpp')?.invalid && organizationForm.get('kpp')?.touched">
+            Введите корректный КПП (9 цифр).
+          </small>
+        </div>
+      </div>
+
+      <div class="p-field">
+        <p-floatLabel>
+          <input id="founder"
+                 pInputText
+                 formControlName="founder" />
+          <label for="founder">Учредитель (ФИО)</label>
+        </p-floatLabel>
+      </div>
+
+      <div class="p-field">
+        <p-floatLabel>
+          <input id="address"
+                 pInputText
+                 formControlName="address" />
+          <label for="address">Адрес</label>
+        </p-floatLabel>
+        <small *ngIf="organizationForm.get('address')?.invalid && organizationForm.get('address')?.touched">
+          Адрес обязателен.
+        </small>
+      </div>
+
+      <div class="p-field">
+        <p-floatLabel>
+          <p-inputMask id="phone"
+                       mask="+7 999 999 9999"
+                       formControlName="phone" />
+          <label for="phone">Телефон</label>
+        </p-floatLabel>
+        <small *ngIf="organizationForm.get('phone')?.invalid && organizationForm.get('phone')?.touched">
+          Введите корректный телефонный номер.
+        </small>
+      </div>
+
+      <div class="form-buttons">
+        <button pButton
+                [disabled]="!this.organizationForm.valid"
+                type="button"
+                label="Сохранить"
+                (click)="onSave()"></button>
+        <button pButton
+                type="button"
+                label="Назад"
+                class="p-button-secondary"
+                (click)="onClose()"></button>
+      </div>
+    </form>
+  </div>
+</div>
